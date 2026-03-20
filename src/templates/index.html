@@ -2,150 +2,65 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Welcome - Home</title>
+    <title>Home</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-        }
-
-        body {
-            min-height: 100vh;
-            background: #1a1129; 
+        /* Общие стили из предыдущих примеров */
+        body { margin: 0; background: #0E2931; color: #E2E2E0; font-family: 'Segoe UI', sans-serif; }
+        
+        nav {
+            background: #12484C;
+            padding: 15px 50px;
             display: flex;
-            justify-content: center;
+            justify-content: space-between;
             align-items: center;
-            padding: 20px;
-            overflow: hidden;
-            position: relative;
+            border-bottom: 2px solid #2B7574;
         }
 
-        /* Large animated liquid background */
-        body::before {
-            content: "";
-            position: absolute;
-            width: 600px;
-            height: 600px;
-            background: linear-gradient(135deg, #3E2F5B, #E94560);
-            border-radius: 50%;
-            filter: blur(120px);
-            z-index: 0;
-            animation: move 20s infinite alternate ease-in-out;
+        .logo { font-size: 24px; font-weight: bold; color: #E2E2E0; }
+
+        .nav-links a {
+            color: #E2E2E0;
+            text-decoration: none;
+            margin-left: 20px;
+            font-size: 14px;
+            padding: 8px 15px;
+            border-radius: 5px;
+            transition: 0.3s;
         }
 
-        @keyframes move {
-            0% { transform: translate(-50%, -30%) scale(1); }
-            100% { transform: translate(50%, 30%) scale(1.2); }
-        }
+        .nav-links a.logout { background: #861211; }
+        .nav-links a:hover:not(.logout) { color: #2B7574; }
 
-        .hero-container {
-            width: 100%;
-            max-width: 600px;
-            z-index: 1;
+        .hero {
+            padding: 100px 50px;
             text-align: center;
         }
 
-        .glass-card {
-            background: rgba(255, 255, 255, 0.05); 
-            backdrop-filter: blur(30px);
-            -webkit-backdrop-filter: blur(30px);
-            padding: 60px 40px;
-            border-radius: 32px;
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.6), 
-                        inset 0 0 20px rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            color: white;
-        }
-
-        h1 {
-            font-size: 48px;
-            font-weight: 800;
-            margin-bottom: 20px;
-            letter-spacing: -1px;
-            background: linear-gradient(to right, #ffffff, #E94560);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        p {
-            font-size: 18px;
-            color: rgba(255, 255, 255, 0.7);
-            margin-bottom: 40px;
-            line-height: 1.6;
-        }
-
-        .button-group {
-            display: flex;
-            gap: 20px;
-            justify-content: center;
-        }
-
-        .btn {
-            padding: 16px 35px;
-            border-radius: 14px;
-            font-size: 16px;
-            font-weight: 700;
-            text-decoration: none;
-            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            display: inline-block;
-        }
-
-        /* Primary Button (Register) */
-        .btn-primary {
-            background: #E94560;
-            color: white;
-            box-shadow: 0 10px 25px rgba(233, 69, 96, 0.3);
-        }
-
-        .btn-primary:hover {
-            background: #ff5874;
-            transform: translateY(-3px);
-            box-shadow: 0 15px 30px rgba(233, 69, 96, 0.5);
-        }
-
-        /* Secondary Button (Login) */
-        .btn-secondary {
-            background: rgba(255, 255, 255, 0.1);
-            color: white;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            backdrop-filter: blur(10px);
-        }
-
-        .btn-secondary:hover {
-            background: rgba(255, 255, 255, 0.2);
-            transform: translateY(-3px);
-            border-color: rgba(255, 255, 255, 0.4);
-        }
-
-        .btn:active {
-            transform: scale(0.95);
-        }
-
-        @media (max-width: 480px) {
-            .button-group {
-                flex-direction: column;
-            }
-            h1 { font-size: 32px; }
+        .card {
+            background: #12484C;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px;
+            border-radius: 15px;
+            border-left: 5px solid #861211;
         }
     </style>
 </head>
 <body>
+    <nav>
+        <div class="logo">MyBrand</div>
+        <div class="nav-links">
+            <a href="#">Dashboard</a>
+            <a href="#">Profile</a>
+            <a href="/logout/" class="logout">Logout</a>
+        </div>
+    </nav>
 
-<div class="hero-container">
-    <div class="glass-card">
-        <h1>Welcome to YourApp</h1>
-        <p>Experience the next generation of liquid glass design. Simple, fast, and secure.</p>
-        
-        <div class="button-group">
-            <a href="/login/" class="btn btn-secondary">Login</a>
-            <a href="/register/" class="btn btn-primary">Get Started</a>
-            <a href="/logout/" class="btn btn-secondary">Logout</a>
+    <div class="hero">
+        <div class="card">
+            <h1>Welcome, {{ user.username }}!</h1>
+            <p style="margin-top: 20px; color: #2B7574;">You are successfully logged into the system.</p>
         </div>
     </div>
-</div>
-
 </body>
 </html>

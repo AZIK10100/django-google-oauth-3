@@ -1,232 +1,189 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register - Glass Edition</title>
+    <title>Register</title>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            font-family: 'Segoe UI', Arial, sans-serif;
         }
 
         body {
             min-height: 100vh;
-            background: #1a1129; /* Deep dark base */
+            background: radial-gradient(circle at center, #12484C, #0E2931);
             display: flex;
             justify-content: center;
             align-items: center;
             padding: 20px;
-            overflow: hidden;
-            position: relative;
         }
 
-        /* Animated liquid glow in the background */
-        body::before {
-            content: "";
-            position: absolute;
-            width: 450px;
-            height: 450px;
-            background: linear-gradient(135deg, #3E2F5B, #E94560);
-            border-radius: 50%;
-            filter: blur(100px);
-            z-index: 0;
-            animation: float 12s infinite alternate ease-in-out;
-        }
-
-        @keyframes float {
-            from { transform: translate(-40%, -20%); }
-            to { transform: translate(40%, 20%); }
-        }
-
-        .register-container {
+        .auth-container {
             width: 100%;
-            max-width: 420px;
-            z-index: 1;
+            max-width: 450px;
         }
 
-        .register-form {
-            /* Glassmorphism effect */
-            background: rgba(255, 255, 255, 0.05); 
-            backdrop-filter: blur(25px);
-            -webkit-backdrop-filter: blur(25px);
+        .auth-form {
+            background: rgba(18, 72, 76, 0.4);
+            backdrop-filter: blur(15px);
             padding: 40px;
-            border-radius: 24px;
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5), 
-                        inset 0 0 15px rgba(255, 255, 255, 0.05);
-            color: white;
-            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+            color: #E2E2E0;
+            border: 1px solid #2B7574;
         }
 
         h2 {
             text-align: center;
             margin-bottom: 25px;
             font-size: 28px;
-            font-weight: 600;
-            letter-spacing: 1px;
+            color: #E2E2E0;
         }
 
-        .register-form p {
+        .auth-form p {
             margin-bottom: 15px;
             display: flex;
             flex-direction: column;
         }
 
-        .register-form label {
-            margin-bottom: 6px;
-            font-size: 13px;
-            color: rgba(255, 255, 255, 0.6);
-            font-weight: 500;
+        .auth-form label {
+            margin-bottom: 8px;
+            font-size: 14px;
+            color: #2B7574;
+            font-weight: bold;
         }
 
-        .register-form input {
+        .auth-form input {
             width: 100%;
-            padding: 12px 16px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 12px;
+            padding: 12px;
+            border: 1px solid #2B7574;
+            border-radius: 10px;
             outline: none;
-            font-size: 15px;
-            background: rgba(255, 255, 255, 0.07);
-            color: white;
-            transition: all 0.3s ease;
+            font-size: 14px;
+            background: #0E2931;
+            color: #E2E2E0;
         }
 
-        .register-form input:focus {
-            background: rgba(255, 255, 255, 0.12);
-            border-color: #E94560;
-            box-shadow: 0 0 15px rgba(233, 69, 96, 0.2);
+        .auth-form input:focus {
+            border-color: #E2E2E0;
+            box-shadow: 0 0 5px #2B7574;
         }
 
-        /* Main Submit Button */
-        .btn-submit {
+        .errorlist {
+            color: #861211;
+            font-size: 12px;
+            list-style: none;
+            margin-bottom: 10px;
+            padding: 0;
+        }
+
+        button {
             width: 100%;
             padding: 14px;
             margin-top: 10px;
             border: none;
-            border-radius: 12px;
-            background: #E94560;
-            color: white;
-            font-size: 15px;
-            font-weight: 700;
-            text-transform: uppercase;
+            border-radius: 10px;
+            background: #861211;
+            color: #E2E2E0;
+            font-size: 16px;
+            font-weight: bold;
             cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 10px 20px rgba(233, 69, 96, 0.2);
+            transition: 0.3s;
         }
 
-        .btn-submit:hover {
-            background: #ff5874;
+        button:hover {
+            background: #a51816;
             transform: translateY(-2px);
-            box-shadow: 0 15px 25px rgba(233, 69, 96, 0.4);
         }
-
-        /* Google Login Button */
-        .google-auth {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 100%;
-            padding: 12px;
-            margin-top: 15px;
-            background: rgba(255, 255, 255, 0.08);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 12px;
-            color: white;
-            text-decoration: none;
-            font-size: 14px;
-            font-weight: 600;
-            transition: all 0.3s ease;
-        }
-
-        .google-auth:hover {
-            background: rgba(255, 255, 255, 0.15);
-            border-color: rgba(255, 255, 255, 0.3);
-        }
-
-        .google-auth img {
-            width: 18px;
-            margin-right: 10px;
-        }
-
-        /* Divider "OR" */
-        .divider {
-            text-align: center;
-            margin: 20px 0;
-            font-size: 12px;
-            color: rgba(255, 255, 255, 0.3);
-            position: relative;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .divider::before, .divider::after {
-            content: "";
-            position: absolute;
-            top: 50%;
-            width: 40%;
-            height: 1px;
-            background: rgba(255, 255, 255, 0.1);
-        }
-        .divider::before { left: 0; }
-        .divider::after { right: 0; }
 
         .link {
             text-align: center;
             margin-top: 20px;
             font-size: 14px;
-            color: rgba(255, 255, 255, 0.5);
         }
 
         .link a {
-            color: #E94560;
+            color: #2B7574;
+            font-weight: bold;
             text-decoration: none;
-            font-weight: 600;
-            margin-left: 5px;
         }
 
         .link a:hover {
+            color: #E2E2E0;
             text-decoration: underline;
         }
 
-        /* Help text for Django fields */
-        .helptext {
-            font-size: 11px;
-            color: rgba(255, 255, 255, 0.4);
-            margin-top: 5px;
-            line-height: 1.3;
+        /* Стили для социальной авторизации */
+        .social-login {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(43, 117, 116, 0.3);
+            text-align: center;
         }
 
-        /* Browser Autofill Fix */
-        input:-webkit-autofill {
-            -webkit-text-fill-color: white !important;
-            -webkit-box-shadow: 0 0 0px 1000px #2a1f3d inset !important;
+        .google-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            padding: 12px;
+            background: #E2E2E0;
+            /* Светлый фон для контраста */
+            color: #0E2931;
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 14px;
+            transition: 0.3s;
+        }
+
+        .google-btn:hover {
+            background: #ffffff;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .google-btn svg {
+            margin-right: 10px;
         }
     </style>
 </head>
+
 <body>
+    <div class="auth-container">
+        <form class="auth-form" method="POST">
+            {% csrf_token %}
+            <h2>Create Account</h2>
+            {{ form.as_p }}
+            <button type="submit">Sign Up</button>
+            {% load socialaccount %}
 
-<div class="register-container">
-    <form class="register-form" method="POST">
-        {% csrf_token %}
-        <h2>Create Account</h2>
-
-        {{ form.as_p }}
-
-        <button type="submit" class="btn-submit">Sign Up</button>
-
-        <div class="divider">or</div>
-
-        {% load socialaccount %}
-        <a href="{% provider_login_url 'google' %}" class="google-auth">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg" alt="Google">
-            Continue with Google
-        </a>
-        
-        <p class="link">Already a member?<a href="/login/">Login here</a></p>
-    </form>
-</div>
-
+            <div class="social-login">
+                <a href="{% provider_login_url 'google' %}" class="google-btn">
+                    <svg width="18" height="18" viewBox="0 0 18 18">
+                        <path
+                            d="M17.64 9.2c0-.637-.057-1.251-.164-1.84H9v3.481h4.844c-.209 1.125-.843 2.078-1.796 2.717v2.258h2.908c1.702-1.567 2.684-3.874 2.684-6.615z"
+                            fill="#4285F4" />
+                        <path
+                            d="M9 18c2.43 0 4.467-.806 5.956-2.184l-2.908-2.258c-.806.54-1.837.86-3.048.86-2.344 0-4.328-1.584-5.036-3.711H.957v2.332A8.997 8.997 0 0 0 9 18z"
+                            fill="#34A853" />
+                        <path
+                            d="M3.964 10.712c-.18-.54-.282-1.117-.282-1.712s.102-1.172.282-1.712V4.956H.957C.347 6.173 0 7.548 0 9s.347 2.827.957 4.044l3.007-2.332z"
+                            fill="#FBBC05" />
+                        <path
+                            d="M9 3.58c1.321 0 2.508.454 3.44 1.345l2.582-2.58C13.463.891 11.426 0 9 0 5.482 0 2.443 2.017.957 4.956L3.964 7.29c.708-2.127 2.692-3.71 5.036-3.71z"
+                            fill="#EA4335" />
+                    </svg>
+                    Continue with Google
+                </a>
+            </div>
+            <p class="link">Already have an account? <a href="/login/">Login</a></p>
+        </form>
+    </div>
 </body>
+
 </html>
