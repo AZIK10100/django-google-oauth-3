@@ -2,98 +2,217 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Login</title>
-</head>
-<body>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Glass Edition</title>
     <style>
         * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: Arial, sans-serif;
-}
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
 
-body {
-    height: 100vh;
-    background: linear-gradient(135deg, #ff7a18, #ffb347);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
+        body {
+            min-height: 100vh;
+            background: #1a1129; 
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            overflow: hidden;
+            position: relative;
+        }
 
-/* Container */
-.login-container {
-    width: 100%;
-    max-width: 400px;
-    padding: 20px;
-}
+        /* Animated liquid glow in the background */
+        body::before {
+            content: "";
+            position: absolute;
+            width: 450px;
+            height: 450px;
+            background: linear-gradient(135deg, #E94560, #3E2F5B);
+            border-radius: 50%;
+            filter: blur(100px);
+            z-index: 0;
+            animation: float 12s infinite alternate ease-in-out;
+        }
 
-/* Form */
-.login-form {
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(12px);
-    padding: 40px;
-    border-radius: 20px;
-    box-shadow: 0 8px 32px rgba(0,0,0,0.2);
-    text-align: center;
-    color: white;
-}
+        @keyframes float {
+            from { transform: translate(-40%, 20%); }
+            to { transform: translate(40%, -20%); }
+        }
 
-/* Title */
-.login-form h2 {
-    margin-bottom: 20px;
-}
+        .login-container {
+            width: 100%;
+            max-width: 400px;
+            z-index: 1;
+        }
 
-/* Inputs */
-.login-form input {
-    width: 100%;
-    padding: 12px;
-    margin: 10px 0;
-    border: none;
-    border-radius: 10px;
-    outline: none;
-    font-size: 14px;
-}
+        .login-form {
+            background: rgba(255, 255, 255, 0.05); 
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            padding: 40px;
+            border-radius: 24px;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5), 
+                        inset 0 0 15px rgba(255, 255, 255, 0.05);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+        }
 
-/* Button */
-.login-form button {
-    width: 100%;
-    padding: 12px;
-    margin-top: 15px;
-    border: none;
-    border-radius: 10px;
-    background: #ff7a18;
-    color: white;
-    font-size: 16px;
-    cursor: pointer;
-    transition: 0.3s;
-}
+        h2 {
+            text-align: center;
+            margin-bottom: 25px;
+            font-size: 28px;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
 
-.login-form button:hover {
-    background: #ff5200;
-}
+        .login-form p {
+            margin-bottom: 15px;
+            display: flex;
+            flex-direction: column;
+        }
 
-/* Link */
-.link {
-    margin-top: 15px;
-    font-size: 14px;
-}
+        .login-form label {
+            margin-bottom: 6px;
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.6);
+        }
 
-.link a {
-    color: #fff;
-    text-decoration: underline;
-}
+        .login-form input {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            outline: none;
+            font-size: 15px;
+            background: rgba(255, 255, 255, 0.07);
+            color: white;
+            transition: all 0.3s ease;
+        }
+
+        .login-form input:focus {
+            background: rgba(255, 255, 255, 0.12);
+            border-color: #E94560;
+            box-shadow: 0 0 15px rgba(233, 69, 96, 0.2);
+        }
+
+        .btn-submit {
+            width: 100%;
+            padding: 14px;
+            margin-top: 10px;
+            border: none;
+            border-radius: 12px;
+            background: #E94560;
+            color: white;
+            font-size: 15px;
+            font-weight: 700;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 20px rgba(233, 69, 96, 0.2);
+        }
+
+        .btn-submit:hover {
+            background: #ff5874;
+            transform: translateY(-2px);
+            box-shadow: 0 15px 25px rgba(233, 69, 96, 0.4);
+        }
+
+        .google-auth {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            padding: 12px;
+            margin-top: 15px;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            color: white;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .google-auth:hover {
+            background: rgba(255, 255, 255, 0.15);
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+
+        .google-auth img {
+            width: 18px;
+            margin-right: 10px;
+        }
+
+        .divider {
+            text-align: center;
+            margin: 20px 0;
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.3);
+            position: relative;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .divider::before, .divider::after {
+            content: "";
+            position: absolute;
+            top: 50%;
+            width: 40%;
+            height: 1px;
+            background: rgba(255, 255, 255, 0.1);
+        }
+        .divider::before { left: 0; }
+        .divider::after { right: 0; }
+
+        .link {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .link a {
+            color: #E94560;
+            text-decoration: none;
+            font-weight: 600;
+            margin-left: 5px;
+        }
+
+        .link a:hover {
+            text-decoration: underline;
+        }
+
+        input:-webkit-autofill {
+            -webkit-text-fill-color: white !important;
+            -webkit-box-shadow: 0 0 0px 1000px #2a1f3d inset !important;
+        }
     </style>
+</head>
+<body>
 
 <div class="login-container">
     <form class="login-form" method="POST">
         {% csrf_token %}
-        <h2>Login</h2>
-        {{ form.as_p }}
-        <button type="submit">Sign In</button>
-        <p class="link">Don't have an account? <a href="/googleauth/register/">Register</a></p>
-    </form>
+        <h2>Welcome Back</h2>
 
-    {% load socialaccount %}
-<a href="{% provider_login_url 'google' %}">Login with Google</a>
+        {{ form.as_p }}
+
+        <button type="submit" class="btn-submit">Login</button>
+
+        <div class="divider">or</div>
+
+        {% load socialaccount %}
+        <a href="{% provider_login_url 'google' %}" class="google-auth">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg" alt="Google">
+            Sign in with Google
+        </a>
+        
+        <p class="link">Don't have an account?<a href="/register/">Sign Up</a></p>
+    </form>
 </div>
+
+</body>
+</html>

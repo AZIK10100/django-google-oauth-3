@@ -1,8 +1,6 @@
-from django.shortcuts import render
-from django.shortcuts import redirect
-from django.contrib.auth import logout
+from django.shortcuts import render, redirect
+from django.contrib.auth import logout, login
 from googleauth.forms import RegisterForm
-from django.contrib.auth import login
 from django.contrib.auth.forms import AuthenticationForm
 
 # Create your views here.
@@ -18,6 +16,8 @@ def login_page(request):
 
     if request.method == 'POST' and form.is_valid():
         user = form.get_user()
+        # Add the backend attribute here
+        user.backend = 'django.contrib.auth.backends.ModelBackend'
         login(request, user)  
         return redirect('index')
 
@@ -28,6 +28,8 @@ def register_view(request):
         form = RegisterForm(request.POST)
         if form.is_valid():
             user = form.save()
+            # Add the backend attribute here
+            user.backend = 'django.contrib.auth.backends.ModelBackend'
             login(request, user)
             return redirect('index')
     else:
